@@ -1,0 +1,6 @@
+@Challenge_Clyvo_Vet_.NET_HostAddress = http://localhost:5068
+
+GET {{Challenge_Clyvo_Vet_.NET_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
