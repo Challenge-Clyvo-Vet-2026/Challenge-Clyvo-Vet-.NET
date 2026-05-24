@@ -1,7 +1,7 @@
-using ClyvoVet.Models;
+using Challenge_Clyvo_Vet_DotNet.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ClyvoVet.Data;
+namespace Challenge_Clyvo_Vet_DotNet.Data;
 
 public class AppDbContext : DbContext
 {

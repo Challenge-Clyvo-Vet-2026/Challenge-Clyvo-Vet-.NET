@@ -1,9 +1,9 @@
-using ClyvoVet.Data;
-using ClyvoVet.Models;
+using Challenge_Clyvo_Vet_DotNet.Data;
+using Challenge_Clyvo_Vet_DotNet.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace ClyvoVet.Controllers;
+namespace Challenge_Clyvo_Vet_DotNet.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

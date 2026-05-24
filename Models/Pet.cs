@@ -1,4 +1,4 @@
-namespace ClyvoVet.Models;
+namespace Challenge_Clyvo_Vet_DotNet.Models;
 
 public class Pet
 {
