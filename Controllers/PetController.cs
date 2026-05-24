@@ -163,11 +163,17 @@ public class PetsController : ControllerBase
             pet.StatusCastrado != "N")
             return BadRequest("StatusCastrado deve ser 'S', 'N' ou nulo.");
 
-        var exists = await _context.Pets.AnyAsync(p => p.IdPet == id);
-        if (!exists)
+        var existing = await _context.Pets.FindAsync(id);
+        if (existing == null)
             return NotFound();
 
-        _context.Entry(pet).State = EntityState.Modified;
+        existing.IdResponsavel     = pet.IdResponsavel;
+        existing.NomePet           = pet.NomePet;
+        existing.EspeciePet        = pet.EspeciePet;
+        existing.RacaPet           = pet.RacaPet;
+        existing.DataNascimentoPet = pet.DataNascimentoPet;
+        existing.StatusCastrado    = pet.StatusCastrado;
+
         await _context.SaveChangesAsync();
 
         return NoContent();
