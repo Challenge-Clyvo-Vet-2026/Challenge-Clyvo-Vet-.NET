@@ -64,8 +64,8 @@ ClyvoVet/
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/clyvovet.git
-cd clyvovet
+git clone https://github.com/Challenge-Clyvo-Vet-2026/Challenge-Clyvo-Vet-.NET.git
+cd Challenge-Clyvo-Vet-.NET
 ```
 
 ### 2. Instalar os pacotes NuGet
