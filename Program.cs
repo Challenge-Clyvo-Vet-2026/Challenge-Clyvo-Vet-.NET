@@ -2,6 +2,8 @@ using Challenge_Clyvo_Vet_DotNet.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
