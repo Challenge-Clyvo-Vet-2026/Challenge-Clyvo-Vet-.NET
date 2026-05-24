@@ -21,14 +21,15 @@ public class PetsController : ControllerBase
     /// Lista todos os pets cadastrados
     /// </summary>
     /// <remarks>
-    /// Retorna todos os pets ordenados por nome.
+    /// Retorna todos os pets ordenados por ID.
     /// </remarks>
-    /// <response code="200">Lista retornada com sucesso</response>
+    /// <response code="200">Lista retornada com sucesso (mesmo que vazia)</response>
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         var pets = await _context.Pets
-            .OrderBy(p => p.NomePet)
+            .OrderBy(p => p.IdPet)
             .ToListAsync();
 
         return Ok(pets);
@@ -41,6 +42,8 @@ public class PetsController : ControllerBase
     /// <response code="200">Pet encontrado</response>
     /// <response code="404">Pet não encontrado</response>
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
         var pet = await _context.Pets.FindAsync(id);
@@ -58,6 +61,8 @@ public class PetsController : ControllerBase
     /// <response code="200">Pets do responsável retornados com sucesso</response>
     /// <response code="404">Nenhum pet encontrado para este responsável</response>
     [HttpGet("responsavel/{idResponsavel}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByResponsavel(int idResponsavel)
     {
         var pets = await _context.Pets
@@ -78,6 +83,8 @@ public class PetsController : ControllerBase
     /// <response code="200">Pets da espécie retornados com sucesso</response>
     /// <response code="404">Nenhum pet encontrado para esta espécie</response>
     [HttpGet("especie/{especie}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByEspecie(string especie)
     {
         var pets = await _context.Pets
@@ -114,6 +121,8 @@ public class PetsController : ControllerBase
     /// <response code="201">Pet criado com sucesso</response>
     /// <response code="400">Dados inválidos ou campos obrigatórios ausentes</response>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] Pet pet)
     {
         if (!ModelState.IsValid)
@@ -149,10 +158,13 @@ public class PetsController : ControllerBase
     /// </remarks>
     /// <param name="id">ID único do pet</param>
     /// <param name="pet">Objeto com os dados atualizados</param>
-    /// <response code="204">Pet atualizado com sucesso</response>
+    /// <response code="200">Pet atualizado com sucesso</response>
     /// <response code="400">ID da URL não corresponde ao IdPet do body</response>
     /// <response code="404">Pet não encontrado</response>
     [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(int id, [FromBody] Pet pet)
     {
         if (id != pet.IdPet)
@@ -176,7 +188,7 @@ public class PetsController : ControllerBase
 
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        return Ok(existing);
     }
 
     /// <summary>
@@ -186,6 +198,8 @@ public class PetsController : ControllerBase
     /// <response code="204">Pet removido com sucesso</response>
     /// <response code="404">Pet não encontrado</response>
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
         var pet = await _context.Pets
