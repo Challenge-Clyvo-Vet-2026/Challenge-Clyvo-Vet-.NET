@@ -19,11 +19,6 @@ public class AppDbContext : DbContext
             // Chave primária
             entity.HasKey(p => p.IdPet);
 
-            // Constraint de PK
-            entity.HasIndex(p => p.IdPet)
-                  .HasDatabaseName("T_CLV_PET_ID_PET_PK")
-                  .IsUnique();
-
             // Colunas
             entity.Property(p => p.IdPet).HasColumnName("ID_PET");
             entity.Property(p => p.IdResponsavel).HasColumnName("ID_RESPONSAVEL").IsRequired();
